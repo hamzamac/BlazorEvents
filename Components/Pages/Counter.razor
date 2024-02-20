@@ -1,0 +1,25 @@
+﻿@page "/counter"
+
+@inject CountState Count;
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+
+<p role="status">Current count: @currentCount</p>
+
+
+
+<EditForm OnSubmit="IncrementCount" Enhance FormName="count-form" Model="currentCount">
+    <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+</EditForm>
+
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+        Count.Refresh();
+    }
+}

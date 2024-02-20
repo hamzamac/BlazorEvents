@@ -1,0 +1,26 @@
+﻿@implements IDisposable
+@inject CountState Count;
+
+<h3>@count</h3>
+
+@code {
+    private IDisposable? subscription;
+    private int count;
+
+    protected  override void OnInitialized()
+    {
+        UpdateCount();
+
+        subscription = Count.Subscribe(EventCallback.Factory.Create(this, UpdateCount));
+    }
+
+    private void UpdateCount()
+    {
+        count++;
+    }
+
+    public void Dispose()
+    {
+        subscription?.Dispose();
+    }
+}
